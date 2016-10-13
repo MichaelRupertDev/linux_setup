@@ -3,11 +3,17 @@ mkdir ~/.setup
 
 fun(){
 	echo "Installing the fun stuff...."
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
+	echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+	sudo add-apt-repository ppa:mamarley/quassel -y
+	sudo apt update
+	sudo apt install spotify-client quassel youtube-dl ffmpeg htop -y 
+	
 }
 
 essential(){
 	echo "Installing the essentials....."
-	sudo apt install git python python-pip python-virtualenv -y 
+	sudo apt install git wget python python-pip python-virtualenv chromium-browser -y 
 }
 
 cloud(){
