@@ -1,16 +1,16 @@
 sudo apt update
 mkdir ~/.setup
 
-install_fun(){
+fun(){
 	echo "Installing the fun stuff...."
 }
 
-install_essential(){
+essential(){
 	echo "Installing the essentials....."
-	sudo apt install git zsh 
+	sudo apt install git python python-pip python-virtualenv -y 
 }
 
-install_cloud(){
+cloud(){
 	cd ~/.setup
 	echo "Installing rclone....."
 
@@ -20,10 +20,12 @@ install_cloud(){
 	sudo cp rclone /usr/sbin/
 	sudo chown root:root /usr/sbin/rclone
 	sudo chmod 755 /usr/sbin/rclone
+	rm -rf ~/.setup/rclone*
 }
 
-install_zsh(){
-	sudo apt install zsh
+zsh(){
+	echo "Configuring zsh...."
+	sudo apt install zsh -y
 	cd ~/.setup
 	git clone https://github.com/zsh-users/antigen
 	git clone https://github.com/powerline/fonts
@@ -31,11 +33,20 @@ install_zsh(){
 	cp ~/linux_setup/.zshrc ~/.zshrc
 }
 
-if [ "$1" == "all" ]
-then
+dev_tools(){
+	echo "Installing Atom......"
+	essential
+	cd ~/.setup
+	wget https://atom.io/download/deb -O atom-amd64.deb
+	sudo dpkg -i atom-amd64.deb
+	rm atom*	
+}
+
+all(){
     install_essential
     install_cloud
+    install_zsh
     install_fun
-else
-    install_essential
-fi
+}
+
+$@
