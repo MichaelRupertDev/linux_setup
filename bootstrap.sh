@@ -13,7 +13,8 @@ fun(){
 
 essential(){
 	echo "Installing the essentials....."
-	sudo apt install git wget python python-pip python-virtualenv chromium-browser -y 
+	sudo apt install git wget python python-pip python-virtualenv chromium-browser tlp -y
+	sudo tlp start 
 }
 
 cloud(){
