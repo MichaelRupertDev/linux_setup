@@ -57,6 +57,7 @@ aliases(){
 	echo "alias gs='git status'" >> ~/.zshrc
 	echo "alias gaa='git add -A'" >> ~/.zshrc
 	echo "alias gcm='git commit -m'" >> ~/.zshrc
+	echo "alias gpm='git push origin master'" >> ~/.zshrc
 }
 
 
