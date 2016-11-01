@@ -7,14 +7,14 @@ fun(){
 	echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 	sudo add-apt-repository ppa:mamarley/quassel -y
 	sudo apt update
-	sudo apt install spotify-client quassel youtube-dl ffmpeg htop -y 
-	
+	sudo apt install spotify-client quassel youtube-dl ffmpeg htop -y
+
 }
 
 essential(){
 	echo "Installing the essentials....."
 	sudo apt install git wget python python-pip python-virtualenv chromium-browser tlp -y
-	sudo tlp start 
+	sudo tlp start
 }
 
 cloud(){
@@ -46,8 +46,19 @@ dev_tools(){
 	cd ~/.setup
 	wget https://atom.io/download/deb -O atom-amd64.deb
 	sudo dpkg -i atom-amd64.deb
-	rm atom*	
+	rm atom*
+	echo "Installing Node......"
+	curl -sL https://deb.nodesource.com/setup | sudo bash -
+	sudo apt install nodejs build-essential -y
+	sudo ln -s /usr/bin/nodejs /usr/bin/node
 }
+
+aliases(){
+	echo "alias gs='git status'" >> ~/.zshrc
+	echo "alias gaa='git add -A'" >> ~/.zshrc
+	echo "alias gcm='git commit -m'" >> ~/.zshrc
+}
+
 
 all(){
     install_essential
