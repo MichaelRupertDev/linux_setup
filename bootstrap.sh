@@ -28,6 +28,12 @@ cloud(){
 	sudo chown root:root /usr/sbin/rclone
 	sudo chmod 755 /usr/sbin/rclone
 	rm -rf ~/.setup/rclone*
+
+	echo "Installing Insync...."
+	cd ~/.setup
+	wget http://s.insynchq.com/builds/insync_1.3.12.36116-precise_amd64.deb
+	sudo dpkg -i insync_1.3.12.36116-precise_amd64.deb
+	rm insync_1.3.12.36116-precise_amd64.deb
 }
 
 zsh(){
@@ -49,7 +55,7 @@ dev_tools(){
 	rm atom*
 	echo "Installing Node......"
 	curl -sL https://deb.nodesource.com/setup | sudo bash -
-	sudo apt install nodejs build-essential -y
+	sudo apt install nodejs npm build-essential -y
 	sudo ln -s /usr/bin/nodejs /usr/bin/node
 }
 
