@@ -5,10 +5,11 @@ fun(){
 	echo "Installing the fun stuff...."
 	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
 	echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+	sudo add-apt-repository ppa:noobslab/themes -y
+	sudo add-apt-repository ppa:noobslab/icons -y
 	sudo add-apt-repository ppa:mamarley/quassel -y
 	sudo apt update
-	sudo apt install spotify-client quassel youtube-dl ffmpeg htop -y
-
+	sudo apt install flatabulous-theme ultra-flat-icons spotify-client transmission-gtk quassel steam youtube-dl ffmpeg htop -y
 }
 
 essential(){
@@ -20,7 +21,6 @@ essential(){
 cloud(){
 	cd ~/.setup
 	echo "Installing rclone....."
-
 	curl -O http://downloads.rclone.org/rclone-current-linux-amd64.zip
 	unzip rclone-current-linux-amd64.zip
 	cd rclone-*-linux-amd64
@@ -47,16 +47,16 @@ zsh(){
 }
 
 dev_tools(){
-	echo "Installing Atom......"
 	essential
-	cd ~/.setup
-	wget https://atom.io/download/deb -O atom-amd64.deb
-	sudo dpkg -i atom-amd64.deb
-	rm atom*
 	echo "Installing Node......"
 	curl -sL https://deb.nodesource.com/setup | sudo bash -
 	sudo apt install nodejs npm build-essential -y
 	sudo ln -s /usr/bin/nodejs /usr/bin/node
+	echo "Installing Atom......"
+	cd ~/.setup
+	wget https://atom.io/download/deb -O atom-amd64.deb
+	sudo dpkg -i atom-amd64.deb
+	rm atom*
 }
 
 aliases(){
@@ -64,14 +64,17 @@ aliases(){
 	echo "alias gaa='git add -A'" >> ~/.zshrc
 	echo "alias gcm='git commit -m'" >> ~/.zshrc
 	echo "alias gpm='git push origin master'" >> ~/.zshrc
+	source ~/.zshrc
 }
 
 
 all(){
-    install_essential
-    install_cloud
-    install_zsh
-    install_fun
+    essential
+		dev_tools
+    cloud
+    zsh
+    fun
+		aliases
 }
 
 $@

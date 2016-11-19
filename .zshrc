@@ -1,4 +1,4 @@
-source ~/antigen/antigen.zsh
+source ~/.setup/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
@@ -18,4 +18,3 @@ antigen theme agnoster
 
 # Tell antigen that you're done.
 antigen apply
-
