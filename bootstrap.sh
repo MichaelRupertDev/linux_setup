@@ -49,11 +49,21 @@ dev_tools(){
 	rm atom*	
 }
 
+theme(){
+	cd ~/.setup
+	sudo apt install git unity-tweak-tool gnome-themes-standard gtk2-engines-murrine -y
+	git clone https://github.com/vooze/arc-black-ubuntu
+	cd arc-black-ubuntu
+	sudo cp -R arc-black-ubuntu* /usr/share/themes
+}
+
 all(){
-    install_essential
-    install_cloud
-    install_zsh
-    install_fun
+    essential
+    cloud
+    zsh
+    fun
+    dev_tools
+    theme
 }
 
 $@
