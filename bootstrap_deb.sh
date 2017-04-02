@@ -3,13 +3,19 @@ mkdir ~/.setup
 
 fun(){
 	echo "Installing the fun stuff...."
-	sudo pacaur -Sy arc-gtk-theme spotify transmission-gtk quassel youtube-dl ffmpeg htop
+	sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
+	echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+	sudo add-apt-repository ppa:noobslab/themes -y
+	sudo add-apt-repository ppa:noobslab/icons -y
+	sudo add-apt-repository ppa:mamarley/quassel -y
+	sudo apt update
+	sudo apt install flatabulous-theme ultra-flat-icons spotify-client transmission-gtk quassel steam youtube-dl ffmpeg htop -y
 }
 
 essential(){
 	echo "Installing the essentials....."
-	bash pacaur_install.sh
-	sudo pacman -Sy git wget chromium
+	sudo apt install git wget python python-pip python-virtualenv chromium-browser tlp -y
+	sudo tlp start
 }
 
 cloud(){
@@ -42,15 +48,17 @@ zsh(){
 
 dev_tools(){
 	essential
-	node
+	echo "Installing Node......"
+	curl -sL https://deb.nodesource.com/setup | sudo bash -
+	sudo apt install nodejs npm build-essential -y
+	sudo ln -s /usr/bin/nodejs /usr/bin/node
 	echo "Installing Atom......"
-	pacman -S atom
+	cd ~/.setup
+	wget https://atom.io/download/deb -O atom-amd64.deb
+	sudo dpkg -i atom-amd64.deb
+	rm atom*
 }
-node(){
-	echo "Installing NodeJS...."
-	pacman -Sy nodejs npm
-	ln -s /usr/bin/nodejs /usr/bin/node
-}
+
 aliases(){
 	echo "alias gs='git status'" >> ~/.zshrc
 	echo "alias gaa='git add -A'" >> ~/.zshrc
