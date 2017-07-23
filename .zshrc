@@ -18,3 +18,5 @@ antigen theme agnoster
 
 # Tell antigen that you're done.
 antigen apply
+
+export DEFAULT_USER=rupert
